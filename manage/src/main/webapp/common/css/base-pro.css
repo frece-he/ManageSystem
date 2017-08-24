@@ -137,7 +137,13 @@ a, a:link, a:hover, a:active, a:visited { text-decoration: none;}
 .mgn-t-400{margin-top:400px;}.mgn-r-400{margin-right:400px;}.mgn-b-400{margin-bottom:400px;}.mgn-l-400{margin-left:400px;}
 .mgn-t-500{margin-top:500px;}.mgn-r-500{margin-right:500px;}.mgn-b-500{margin-bottom:500px;}.mgn-l-500{margin-left:500px;}
 
-.rowul li{display: inline-block !important;}
-
+.home{width:1200px; margin:0 auto; padding:10px 0; box-sizing: border-box;}
+.rowul{font-size: 0}
+.rowul li{display: inline-block;}
+.homeNav{width:100%;}
+.homeNav li{width:200px; box-sizing: border-box;}
+.homeNav li a{display: block; width:100%; height: 50px; line-height: 50px;font-size: 16px; font-weight: 700; text-align: center; border:1px solid #008FDF; border-right:0;}
+.homeNav li a:hover{color: #FFF; background: #008FDF}
+.br-r{border-right: 1px solid #008FDF;}
 
 
