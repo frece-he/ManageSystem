@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="OFF">  
+
+	<properties>
+        <property name="LOG_PATH">d:/Work/logs/</property> 
+        <property name="LOG_NAME">pro-manage</property>
+    </properties>
+    
+    <Appenders>  
+        <Console name="Console" target="SYSTEM_OUT">  
+            <PatternLayout pattern="%d (%t) [%24F:%-3L:%-5p]%x %m%n" />
+        </Console>  
+        <RollingFile name="RollingFile" fileName="${LOG_PATH}/${LOG_NAME}.log"
+                     filePattern="${LOG_PATH}/${LOG_NAME}.%date{yyyy-MM-dd HH:mm:ss.SSS}-%i.log.gz">
+            <PatternLayout pattern="%d (%t) [%24F:%-3L:%-5p]%x %m%n"/>
+            <SizeBasedTriggeringPolicy size="1KB"/>
+        </RollingFile>
+    </Appenders>  
+    
+    <Loggers>  
+        <Root level="debug">
+            <AppenderRef ref="Console" /> 
+            <AppenderRef ref="RollingFile" /> 
+        </Root>
+        <logger name="org.springframework" level="info"/>
+        <logger name="org.mongodb" level="warn"/>
+    </Loggers>  
+</Configuration>  
