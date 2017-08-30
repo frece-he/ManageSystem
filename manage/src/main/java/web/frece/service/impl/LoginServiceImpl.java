@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.bson.Document;
 import org.springframework.stereotype.Service;
 
 import net.sf.json.JSONObject;
@@ -22,17 +23,17 @@ public class LoginServiceImpl implements LoginService {
 	@Override
 	public JSONObject dologin(String userName, String password) throws Exception {
 		JSONObject res = new JSONObject();
-		String database = ConstantsData.DATABASE;
 		String collection = ConstantsData.TABLE_LOGIN;
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put(ConstantsField.Login_username, userName);
 		param.put(ConstantsField.Login_password, password);
-		JSONObject temp = entityDao.getEntity(database, collection, param);
-		if(null != temp && (int)temp.get(ConstantsData.JSONLIST_SIZE) != 0) {
+		Document temp = entityDao.getEntities(collection, param);
+		if(null != temp && (int)temp.get(ConstantsData.RTN_SIZE) != 0) {
 			res.put("userName", userName);
 		}
 		return res;
 	}
+
 
 	
 }

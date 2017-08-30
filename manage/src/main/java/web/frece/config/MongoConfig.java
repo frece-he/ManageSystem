@@ -10,6 +10,9 @@ import org.springframework.context.annotation.Configuration;
 
 import com.mongodb.MongoClient;
 import com.mongodb.ServerAddress;
+import com.mongodb.client.MongoDatabase;
+
+import web.frece.util.ConstantsData;
 
 
 
@@ -35,5 +38,17 @@ public class MongoConfig {
 		}
 		
 		return client;
+	}
+	
+	@Bean(name = "defaultDB")
+	public MongoDatabase getMongoDatabase() {
+		MongoDatabase defaultDB = null;		
+		try {
+			defaultDB = getMongoClient().getDatabase(ConstantsData.DEFAULT_DB);
+		} catch (Exception e) {
+			log.error("MongoConfig Error", e);
+		}
+		return defaultDB;
+		
 	}
 }
