@@ -1,6 +1,7 @@
 package web.frece.service.impl;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -27,8 +28,8 @@ public class LoginServiceImpl implements LoginService {
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put(ConstantsField.Login_username, userName);
 		param.put(ConstantsField.Login_password, password);
-		Document temp = entityDao.getEntities(collection, param);
-		if(null != temp && (int)temp.get(ConstantsData.RTN_SIZE) != 0) {
+		List<Document> temp  = entityDao.getEntities(collection, param);
+		if(null != temp && temp.size() != 0) {
 			res.put("userName", userName);
 		}
 		return res;

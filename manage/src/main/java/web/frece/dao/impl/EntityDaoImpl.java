@@ -42,14 +42,25 @@ public class EntityDaoImpl implements EntityDao {
 
 	@Override
 	public String createEntity(String collection, Document document) throws Exception {
-		document.append(ConstantsField.CREATE_TIME, CommonUtil.getCurrentTime());
-		document.append(ConstantsField.UPDATE_TIME, CommonUtil.getCurrentTime());
-		document.append(ConstantsField.IS_DELETED,false);
+		
 		MongoCollection<Document> coln =  defaultDB.getCollection(collection);
 		coln.insertOne(document);
 		return document.get(ConstantsField.ID).toString();
 	}
 
+	@Override
+	public void createEntities(String collection, List<Document> documents) throws Exception {
+		MongoCollection<Document> coln =  defaultDB.getCollection(collection);
+		
+		String currentTime = CommonUtil.getCurrentTime();
+		for (Document document : documents) {
+			document.append(ConstantsField.CREATE_TIME, currentTime);
+			document.append(ConstantsField.UPDATE_TIME, currentTime);
+			document.append(ConstantsField.IS_DELETED,false);
+		}
+		
+		coln.insertMany(documents);
+	}
 
 	@Override
 	public Document doUpdate(String collection, Bson filter, Map<String, Object> param) throws Exception {
@@ -77,23 +88,21 @@ public class EntityDaoImpl implements EntityDao {
 
 
 	@Override
-	public Document findAll(String collection) throws Exception {
-		Document result = new Document();
-
-		FindIterable<Document> findIterable = defaultDB.getCollection(collection).find();  
-		MongoCursor<Document> mongoCursor = findIterable.iterator();  
+	public  List<Document> findAll(String collection) throws Exception {
 		List<Document> data = new ArrayList<Document>();
+		FindIterable<Document> findIterable = defaultDB.getCollection(collection).find();  
+		MongoCursor<Document> mongoCursor = findIterable.iterator();		
 		while(mongoCursor.hasNext()){  
 //			data.add(Converter.documentToJson(mongoCursor.next()));
 			data.add(mongoCursor.next());
 		}  
-		result.put(ConstantsData.RTN_RESULT, data);
-		result.put(ConstantsData.RTN_SIZE, data.size());
-		return result;
+		
+		return data;
 	}
 
 	@Override
-	public Document getEntities(String collection, Map<String, Object> param) throws Exception {
+	public  List<Document> getEntities(String collection, Map<String, Object> param) throws Exception {
+		List<Document> data = new ArrayList<Document>();
 		Set<String> keySet = param.keySet();
 		Bson[] filter = new Bson[keySet.size() + 1];
 		int i = 0;
@@ -103,42 +112,36 @@ public class EntityDaoImpl implements EntityDao {
 		}
 		filter[i] = Filters.ne(ConstantsField.IS_DELETED, true);
 
-		Document result = new Document();
 		FindIterable<Document> findIterable = defaultDB.getCollection(collection)
 				.find(Filters.and(filter));
 		MongoCursor<Document> mongoCursor = findIterable.iterator();  
-		List<Document> data = new ArrayList<Document>();
 		while(mongoCursor.hasNext()){  
 //			data.add(Converter.documentToJson(mongoCursor.next()));
 			data.add(mongoCursor.next());
 		}  
-		result.put(ConstantsData.RTN_RESULT, data);
-		result.put(ConstantsData.RTN_SIZE, data.size());
-		return result;
+		return data;
 	}
 
 	
 	@Override
-	public Document doSearch(String collection, Bson filter) throws Exception {
+	public  List<Document> doSearch(String collection, Bson filter) throws Exception {
 		return doSearch(ConstantsData.DEFAULT_DB,collection, filter);
 	}
 
 	@Override
-	public Document doSearch(String database, String collection, Bson filter) throws Exception {		
-		Document result = new Document();
+	public  List<Document> doSearch(String database, String collection, Bson filter) throws Exception {	
+		List<Document> data = new ArrayList<Document>();
 		filter = Filters.and(filter, Filters.ne(ConstantsField.IS_DELETED, true));
 		FindIterable<Document> findIterable =  client.getDatabase(database).getCollection(collection)
 				.find(filter);
 		MongoCursor<Document> mongoCursor = findIterable.iterator();  
-		List<Document> data = new ArrayList<Document>();
+		
 		while(mongoCursor.hasNext()){  
 //			data.add(Converter.documentToJson(mongoCursor.next()));
 			data.add(mongoCursor.next());
 		}  
-		result.put(ConstantsData.RTN_RESULT, data);
-		result.put(ConstantsData.RTN_SIZE, data.size());
 
-		return result;
+		return data;
 	}
 
 	@Override
@@ -161,7 +164,7 @@ public class EntityDaoImpl implements EntityDao {
 	@Override
 	public Document removeAll(String collection) throws Exception {
 		Bson filter = Filters.ne(ConstantsField.IS_DELETED, true);
-		return removeEntities(ConstantsData.TABLE_LOGIN, filter);
+		return removeEntities(collection, filter);
 	}
 
 
@@ -179,6 +182,7 @@ public class EntityDaoImpl implements EntityDao {
 		coln.drop();
 		return "droped finished";
 	}
+
 
 	
 }

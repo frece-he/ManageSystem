@@ -1,4 +1,4 @@
-package web.frece.test;
+package test.frece.common;
 
 import java.util.HashMap;
 import java.util.List;
@@ -21,7 +21,6 @@ import web.frece.util.ConstantsField;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:configs/spring-mvc.xml" })
-@SuppressWarnings("unchecked")
 public class EntityDaoTest {
 	@Resource
 	private EntityDao entityDao;
@@ -29,7 +28,7 @@ public class EntityDaoTest {
 	@Test
 	public void testDB() {
 		try {
-			List<Document> jsonList =  (List<Document>) entityDao.findAll(ConstantsData.TABLE_LOGIN).get(ConstantsData.RTN_RESULT);
+			List<Document> jsonList =   entityDao.findAll(ConstantsData.TABLE_LOGIN);
 			for (Document row : jsonList) {
 				System.out.println(row);
 			}
@@ -62,6 +61,16 @@ public class EntityDaoTest {
 		String res = entityDao.createEntity(ConstantsData.TABLE_LOGIN, entity);
 		System.out.println(res);
 	}
+	
+	@Test
+	public void testCreateEntities()throws Exception{
+		List<Document> list = GenerateTestData.generateListDocForCustomTable("EN", 100);
+//		for (Document document : list) {
+//			System.out.println(document.toJson());
+//		}
+		entityDao.createEntities(ConstantsData.TABLE_CUSTOMER, list);
+	}
+	
 
 	@Test
 	public void testDoUpdateStringBsonMapOfStringObject()throws Exception {
@@ -87,10 +96,9 @@ public class EntityDaoTest {
 
 	@Test
 	public void testFindAll()throws Exception {
-		Document res = entityDao.findAll(ConstantsData.TABLE_LOGIN);
+		List<Document> res = entityDao.findAll(ConstantsData.TABLE_LOGIN);
 		
-		List<Document> resList = (List<Document>) res.get(ConstantsData.RTN_RESULT);
-		for (Document document : resList) {
+		for (Document document : res) {
 			System.out.println(document.toJson());
 		}
 		
@@ -102,9 +110,8 @@ public class EntityDaoTest {
 	public void testGetEntity()throws Exception {
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put(ConstantsField.Login_username, "henry");
-		Document res =  entityDao.getEntities(ConstantsData.TABLE_LOGIN, param);
+		List<Document> resList  =  entityDao.getEntities(ConstantsData.TABLE_LOGIN, param);
 		
-		List<Document> resList = (List<Document>) res.get(ConstantsData.RTN_RESULT);
 		for (Document document : resList) {
 			System.out.println(document.toJson());
 		}
@@ -115,9 +122,8 @@ public class EntityDaoTest {
 
 		Bson filter = Filters.eq(ConstantsField.Login_username, "henry");
 		
-		Document res =  entityDao.doSearch(ConstantsData.TABLE_LOGIN, filter);
+		List<Document> resList =  entityDao.doSearch(ConstantsData.TABLE_LOGIN, filter);
 		
-		List<Document> resList = (List<Document>) res.get(ConstantsData.RTN_RESULT);
 		for (Document document : resList) {
 			System.out.println(document.toJson());
 		}
@@ -128,9 +134,8 @@ public class EntityDaoTest {
 
 		Bson filter = Filters.ne(ConstantsField.Login_username, "frece");
 		
-		Document res =  entityDao.doSearch(ConstantsData.DEFAULT_DB, ConstantsData.TABLE_LOGIN, filter);
+		List<Document> resList =  entityDao.doSearch(ConstantsData.DEFAULT_DB, ConstantsData.TABLE_LOGIN, filter);
 		
-		List<Document> resList = (List<Document>) res.get(ConstantsData.RTN_RESULT);
 		for (Document document : resList) {
 			System.out.println(document.toJson());
 		}
@@ -148,7 +153,7 @@ public class EntityDaoTest {
 	
 	@Test
 	public void testRemoveAll() throws Exception  {
-		Document res = entityDao.removeAll(ConstantsData.TABLE_LOGIN);
+		Document res = entityDao.removeAll(ConstantsData.TABLE_CUSTOMER);
 		System.out.println(res);
 	}
 
@@ -162,9 +167,9 @@ public class EntityDaoTest {
 //	@SuppressWarnings("deprecation")
 //	@Test
 //	public void testDeleteAll() throws Exception{
-//		System.out.println(entityDao.deleteAll(ConstantsData.TABLE_LOGIN));
+//		System.out.println(entityDao.deleteAll(ConstantsData.TABLE_CUSTOMER));
 //	}
-//	
+	
 	
 	
 	

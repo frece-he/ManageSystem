@@ -1,4 +1,4 @@
-package web.frece.test;
+package test.frece.model;
 
 import java.util.HashMap;
 import java.util.Map;

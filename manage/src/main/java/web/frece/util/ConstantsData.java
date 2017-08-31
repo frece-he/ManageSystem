@@ -14,6 +14,7 @@ public class ConstantsData {
 	
 	public static final String DEFAULT_DB = "manage";// 数据库名
 	public static final String TABLE_LOGIN = "manage_login";// 登录表表名
+	public static final String TABLE_CUSTOMER = "manage_customer";// 客户表表名
 	
 	public static final String RTN_RESULT = "result"; //返回结果json
 	public static final String RTN_SIZE = "total";		//返回长度

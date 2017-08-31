@@ -1,4 +1,4 @@
-package web.frece.test;
+package test.frece.common;
 
 import org.junit.Test;
 
