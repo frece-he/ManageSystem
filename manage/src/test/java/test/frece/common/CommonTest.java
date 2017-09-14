@@ -17,7 +17,7 @@ public class CommonTest {
 			}else {
 				System.out.println(CommonUtil.getCurrentDate());
 			}
-			
+			Thread.sleep(2);
 		}
 		
 	}
