@@ -4,7 +4,7 @@
   <artifactId>manage</artifactId>
   <packaging>war</packaging>
   <version>0.0.1-SNAPSHOT</version>  
-  <name>frece Maven Webapp</name>
+  <name>frece Maven Manage App</name>
   
 	<properties>
 		<!-- spring版本号 -->
