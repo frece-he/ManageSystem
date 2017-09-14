@@ -1,15 +1,19 @@
 package web.frece.service.impl;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.bson.Document;
 import org.springframework.stereotype.Service;
 
 import net.sf.json.JSONObject;
 import web.frece.dao.EntityDao;
 import web.frece.service.LoginService;
+import web.frece.util.ConstantsData;
+import web.frece.util.ConstantsField;
 
 @Service
 public class LoginServiceImpl implements LoginService {
@@ -19,14 +23,18 @@ public class LoginServiceImpl implements LoginService {
 	
 	@Override
 	public JSONObject dologin(String userName, String password) throws Exception {
-		String index = "login";
-		String type = "";
+		JSONObject res = new JSONObject();
+		String collection = ConstantsData.TABLE_LOGIN;
 		Map<String, Object> param = new HashMap<String, Object>();
-		param.put("userName", userName);
-		param.put("password", password);
-		JSONObject res = entityDao.getEntity(index, type, param);
+		param.put(ConstantsField.Login_username, userName);
+		param.put(ConstantsField.Login_password, password);
+		List<Document> temp  = entityDao.getEntities(collection, param);
+		if(null != temp && temp.size() != 0) {
+			res.put("userName", userName);
+		}
 		return res;
 	}
+
 
 	
 }

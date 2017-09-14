@@ -1,5 +1,6 @@
 package web.frece.service;
 
+
 import net.sf.json.JSONObject;
 
 public interface LoginService {
