@@ -1,4 +1,4 @@
-package web.frece.util;
+package web.frece.mana.util;
 
 public class ConstantsField {
 

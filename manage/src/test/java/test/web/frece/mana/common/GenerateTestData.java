@@ -1,4 +1,4 @@
-package test.frece.common;
+package test.web.frece.mana.common;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

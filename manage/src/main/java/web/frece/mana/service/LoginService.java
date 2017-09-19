@@ -1,4 +1,4 @@
-package web.frece.service;
+package web.frece.mana.service;
 
 
 import net.sf.json.JSONObject;
