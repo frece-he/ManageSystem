@@ -1,4 +1,4 @@
-package web.frece.config;
+package web.frece.mana.config;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +12,7 @@ import com.mongodb.MongoClient;
 import com.mongodb.ServerAddress;
 import com.mongodb.client.MongoDatabase;
 
-import web.frece.util.ConstantsData;
+import web.frece.mana.util.ConstantsData;
 
 
 

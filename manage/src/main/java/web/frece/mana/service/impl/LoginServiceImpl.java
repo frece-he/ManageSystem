@@ -1,4 +1,4 @@
-package web.frece.service.impl;
+package web.frece.mana.service.impl;
 
 import java.util.HashMap;
 import java.util.List;
@@ -10,10 +10,10 @@ import org.bson.Document;
 import org.springframework.stereotype.Service;
 
 import net.sf.json.JSONObject;
-import web.frece.dao.EntityDao;
-import web.frece.service.LoginService;
-import web.frece.util.ConstantsData;
-import web.frece.util.ConstantsField;
+import web.frece.mana.dao.EntityDao;
+import web.frece.mana.service.LoginService;
+import web.frece.mana.util.ConstantsData;
+import web.frece.mana.util.ConstantsField;
 
 @Service
 public class LoginServiceImpl implements LoginService {

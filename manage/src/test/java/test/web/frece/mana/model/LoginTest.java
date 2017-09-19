@@ -1,4 +1,4 @@
-package test.frece.model;
+package test.web.frece.mana.model;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,7 +11,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import net.sf.json.JSONObject;
-import web.frece.service.LoginService;
+import web.frece.mana.service.LoginService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:configs/spring-mvc.xml" })

@@ -1,4 +1,4 @@
-package web.frece.controller;
+package web.frece.mana.controller;
 
 
 import java.io.Serializable;
@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import net.sf.json.JSONObject;
-import web.frece.service.LoginService;
-import web.frece.util.CommonUtil;
-import web.frece.util.ResultModel;
+import web.frece.mana.service.LoginService;
+import web.frece.mana.util.CommonUtil;
+import web.frece.mana.util.ResultModel;
 
 @Controller
 @RequestMapping("/login")

@@ -1,4 +1,4 @@
-package web.frece.dao;
+package web.frece.mana.dao;
 
 import java.util.List;
 import java.util.Map;

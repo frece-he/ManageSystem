@@ -1,4 +1,4 @@
-package web.frece.util;
+package web.frece.mana.util;
 
 import java.util.HashMap;
 import java.util.Iterator;

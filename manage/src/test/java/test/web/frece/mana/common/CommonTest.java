@@ -1,8 +1,8 @@
-package test.frece.common;
+package test.web.frece.mana.common;
 
 import org.junit.Test;
 
-import web.frece.util.CommonUtil;
+import web.frece.mana.util.CommonUtil;
 
 public class CommonTest {
 

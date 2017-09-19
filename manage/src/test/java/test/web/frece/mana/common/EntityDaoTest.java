@@ -1,4 +1,4 @@
-package test.frece.common;
+package test.web.frece.mana.common;
 
 import java.util.HashMap;
 import java.util.List;
@@ -15,9 +15,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.mongodb.client.model.Filters;
 
-import web.frece.dao.EntityDao;
-import web.frece.util.ConstantsData;
-import web.frece.util.ConstantsField;
+import web.frece.mana.dao.EntityDao;
+import web.frece.mana.util.ConstantsData;
+import web.frece.mana.util.ConstantsField;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:configs/spring-mvc.xml" })

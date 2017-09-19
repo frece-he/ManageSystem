@@ -1,4 +1,4 @@
-package web.frece.dao.impl;
+package web.frece.mana.dao.impl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -18,10 +18,10 @@ import com.mongodb.client.model.Filters;
 import com.mongodb.client.result.DeleteResult;
 import com.mongodb.client.result.UpdateResult;
 
-import web.frece.dao.EntityDao;
-import web.frece.util.CommonUtil;
-import web.frece.util.ConstantsData;
-import web.frece.util.ConstantsField;
+import web.frece.mana.dao.EntityDao;
+import web.frece.mana.util.CommonUtil;
+import web.frece.mana.util.ConstantsData;
+import web.frece.mana.util.ConstantsField;
 
 
 @Repository(value="entityDao")
